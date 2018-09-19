@@ -1,7 +1,0 @@
-query {
-  allPosts {
-    title
-    slug
-    content
-  }
-}

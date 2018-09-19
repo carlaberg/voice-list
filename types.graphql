@@ -1,0 +1,23 @@
+type User @model {
+  # Required system field:
+  id: ID! @isUnique # read-only (managed by Graphcool)
+  # Optional system fields (remove if not needed):
+  createdAt: DateTime! # read-only (managed by Graphcool)
+  updatedAt: DateTime! # read-only (managed by Graphcool)
+  name: String
+  email: String @isUnique
+  password: String
+
+  lists: [List!]! @relation(name: "UserLists")
+}
+
+type List @model {
+  # Required system field:
+  id: ID! @isUnique # read-only (managed by Graphcool)
+  # Optional system fields (remove if not needed):
+  createdAt: DateTime! # read-only (managed by Graphcool)
+  updatedAt: DateTime! # read-only (managed by Graphcool)
+  listItems: [String!]
+
+  author: User! @relation(name: "UserLists")
+}

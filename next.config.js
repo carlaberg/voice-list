@@ -1,5 +1,4 @@
 const withPlugins = require('next-compose-plugins');
-const css = require('@zeit/next-css');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
@@ -21,4 +20,4 @@ const nextConfig = {
   }
 };
 
-module.exports = withPlugins([css], nextConfig);
+module.exports = withPlugins([], nextConfig);

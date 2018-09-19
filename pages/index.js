@@ -1,8 +1,8 @@
 import App from '../components/App';
-import PostListing from '../components/PostListing';
+import ListListing from '../components/ListListing';
 
 export default () => (
   <App>
-    <PostListing />
+    <ListListing />
   </App>
 );

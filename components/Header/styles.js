@@ -7,5 +7,7 @@ export const HeaderWrapper = styled.header`
 `;
 
 export const StyledLink = styled.a`
+  margin: 20px;
   color: black;
+  cursor: pointer;
 `;
