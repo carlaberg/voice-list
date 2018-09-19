@@ -1,1 +1,1 @@
-# Boilerplate for next apps using apollo client
+# You just name it and it ends up on a list!
