@@ -1,5 +1,23 @@
 import Document, { Head, Main, NextScript } from 'next/document';
-import { ServerStyleSheet } from 'styled-components';
+import { ServerStyleSheet, injectGlobal } from 'styled-components';
+import { backgroundWhite } from '../style/variables';
+
+injectGlobal`
+  html,
+  body,
+  #root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background: ${backgroundWhite.hex};
+    font-family: 'Barlow', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+`;
 
 export default class MyDocument extends Document {
   static getInitialProps({ renderPage }) {
@@ -15,6 +33,10 @@ export default class MyDocument extends Document {
         <Head>
           <title>My page</title>
           {this.props.styleTags}
+          <link
+            href="https://fonts.googleapis.com/css?family=Barlow:100,400,600"
+            rel="stylesheet"
+          />
         </Head>
         <body>
           <Main />

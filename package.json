@@ -1,19 +1,21 @@
 {
   "name": "voice-list",
   "scripts": {
-    "dev": "npm run clearbabelcache && next",
+    "dev": "npm run clearbabelcache && node server.js",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "clearbabelcache": "rm -rf ./node_modules/.cache/babel-loader"
   },
   "dependencies": {
     "@types/bcryptjs": "^2.4.1",
     "@types/validator": "^6.3.0",
     "apollo-boost": "^0.1.3",
+    "apollo-link-context": "^1.0.9",
     "babel-plugin-import-graphql": "^2.6.2",
     "bcryptjs": "^2.4.3",
     "carls-components": "0.0.10",
     "dotenv-webpack": "^1.5.7",
+    "express": "^4.16.3",
     "graphcool-lib": "^0.1.0",
     "graphql": "0.13.0",
     "graphql-request": "^1.4.0",
@@ -21,10 +23,12 @@
     "isomorphic-unfetch": "2.0.0",
     "next": "latest",
     "next-compose-plugins": "^2.1.1",
+    "next-page-transitions": "^1.0.0-alpha.4",
     "prop-types": "15.6.1",
     "react": "^16.5.2",
     "react-apollo": "2.1.0",
     "react-dom": "^16.5.2",
+    "react-spring": "^5.8.0",
     "styled-components": "^3.4.9",
     "validator": "^9.0.0"
   },

@@ -1,10 +1,9 @@
 import { TestButton } from 'carls-components';
-import App from '../components/App';
+import BaseLayout from '../components/BaseLayout';
 import ListListing from '../components/ListListing';
 
 export default () => (
-  <App>
-    <TestButton>this carls button</TestButton>
+  <BaseLayout>
     <ListListing />
-  </App>
+  </BaseLayout>
 );
