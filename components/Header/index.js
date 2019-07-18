@@ -13,6 +13,7 @@ import LOGGED_IN_USER from '../../queries/loggedInUser.graphql';
 const Header = props => (
   <Query query={LOGGED_IN_USER} fetchPolicy="network-only">
     {({ loading, data, refetch }) => {
+      if (loading) return null;
       const loginButton = () => (
         <React.Fragment>
           <Transition

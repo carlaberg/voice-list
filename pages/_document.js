@@ -31,7 +31,6 @@ export default class MyDocument extends Document {
     return (
       <html>
         <Head>
-          <title>My page</title>
           {this.props.styleTags}
           <link
             href="https://fonts.googleapis.com/css?family=Barlow:100,400,600"

@@ -14,7 +14,6 @@ class Dashboard extends React.Component {
             return <BaseLayout>Dashboard</BaseLayout>;
           }
 
-          this.props.router.replace('/');
           return null;
         }}
       </Query>
