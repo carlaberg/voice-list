@@ -1,0 +1,36 @@
+# GQL schema defenition for user
+
+type User {
+  _id: ID!
+  email: String!
+  password: String
+}
+
+type LoggedInUserPayload {
+  userId: ID
+}
+
+input CreateUserInput {
+  email: String!
+  password: String!
+}
+
+type AuthData {
+  token: String!
+  userId: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Query {
+  user: User!
+  loggedInUser: LoggedInUserPayload
+}
+
+type Mutation {
+  loginUser(input: LoginInput!): AuthData!
+  createUser(input: CreateUserInput!): AuthData!
+}

@@ -1,3 +1,9 @@
-/node_modules
-.env
-.next
+.DS_Store
+
+backend/node_modules
+backend/docker/data
+backend/.env
+
+frontend/node_modules
+frontend/.env
+frontend/.next

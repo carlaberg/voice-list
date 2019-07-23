@@ -1,0 +1,20 @@
+{
+  "name": "gql-server-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "dev": "NODE_ENV=development nodemon server.js"
+  },
+  "author": "Carl Åberg",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.0",
+    "dotenv": "^8.0.0",
+    "graphql-yoga": "^1.18.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.6.5",
+    "nodemon": "^1.19.1"
+  }
+}

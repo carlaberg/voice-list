@@ -1,5 +1,0 @@
-query LoggedInUser {
-  loggedInUser {
-    id
-  }
-}

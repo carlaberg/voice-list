@@ -1,0 +1,28 @@
+# GQL schema defenition for list
+
+type List {
+  _id: ID!
+  name: String!
+  list: [String!]!
+  createdBy: User!
+}
+
+input CreateListInput {
+  name: String!
+  list: [String!]!
+}
+
+input UpdateListInput {
+  name: String
+  list: [String]
+}
+
+extend type Query {
+  userLists: [List!]!
+}
+
+extend type Mutation {
+  createList(input: CreateListInput!): List!
+  updateList(id: ID!, input: UpdateListInput!): List!
+  deleteList(id: ID!): List!
+}
