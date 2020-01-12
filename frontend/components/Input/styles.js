@@ -1,50 +1,50 @@
-import styled from 'styled-components';
-import * as variables from '../../style/variables';
+import styled from 'styled-components'
+import { FontMedium, FontSmall } from '../../layout/mixins'
 
 export const InputWrapper = styled.div`
   width: 100%;
   position: relative;
-`;
+`
 
 export const StyledInput = styled.input`
   width: 100%;
   display: block;
   border: none;
   outline: none;
-  background: ${variables.lightWhite.hex};
+  background: ${({ theme }) => theme.colorWhite};
   height: 40px;
-  ${variables.fontMedium()};
-  color: ${variables.black.hex};
-  border-bottom: 1px solid rgba(${variables.gray.rgb}, 0.2);
+  ${FontMedium};
+  color: ${({ theme }) => theme.colorBlack};
+  border-bottom: 1px solid ${({ theme }) => theme.colorGrayOpacity};
   padding-right: 20px;
 
   &::placeholder {
-    ${variables.fontSmall()};
-    color: ${variables.gray.hex};
+    ${FontSmall};
+    color: ${({ theme }) => theme.colorGray};
   }
 
   &:focus + span {
     width: 100%;
   }
-`;
+`
 
 export const Underline = styled.span`
   width: 0;
   height: 1px;
-  background: ${variables.blue.hex};
+  background: ${({ theme }) => theme.colorBlue};
   display: block;
-  transition: width ${variables.transitions.slow};
+  transition: width ${({ theme }) => theme.transitionRegular};
   transform: translateY(-1px);
-`;
+`
 
 export const Message = styled.div`
   height: 30px;
   line-height: 30px;
-  ${variables.fontSmall()};
-  color: rgba(${variables.accentRed.rgb}, 0.7);
+  ${FontSmall};
+  color: ${({ theme }) => theme.colorAccentOpacity};
   opacity: ${props => (!props.show ? '0' : '1')};
-  transition: opacity ${variables.transitions.slow};
-`;
+  transition: opacity ${({ theme }) => theme.transitionRegular};
+`
 
 export const Indicator = styled.span`
   display: block;
@@ -55,7 +55,7 @@ export const Indicator = styled.span`
   right: 0;
   top: 20px;
   transform: translateY(-50%);
-  background: ${props => (props.valid ? variables.green : variables.accentRed.hex)};
-  transition: background ${variables.transitions.slow}, opacity ${variables.transitions.slow};
+  background: ${props => (props.valid ? props.theme.colorGreen : props.theme.colorAccent)};
+  transition: ${({ theme }) => `background ${theme.transitionRegular}, opacity ${theme.transitionRegular}`};
   opacity: ${props => (props.show ? '1' : '0')};
-`;
+`

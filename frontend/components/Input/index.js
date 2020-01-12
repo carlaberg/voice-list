@@ -12,10 +12,11 @@ class Input extends React.Component {
   }
 
   render() {
-    const { showIndicators } = this.state;
-    const { message, valid, showMessage } = this.props;
+    const { showIndicators } = this.state
+    const { message, valid, showMessage } = this.props
+    
     return (
-      <InputWrapper onClick={() => this.setState({ showIndicators: true })}>
+      <InputWrapper className={this.props.className} onClick={() => this.setState({ showIndicators: true })}>
         <StyledInput {...this.props} />
         <Underline />
         <Message message={message} show={showMessage}>

@@ -18,6 +18,7 @@ input UpdateListInput {
 }
 
 extend type Query {
+  list(id: ID!): List!
   userLists: [List!]!
 }
 

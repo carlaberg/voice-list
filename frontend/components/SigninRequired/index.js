@@ -1,18 +1,20 @@
-import { Query } from 'react-apollo';
-import CURRENT_USER_QUERY from '../../queries/loggedInUser.graphql';
-import AuthForm from '../AuthForm';
+import { Query } from 'react-apollo'
+import CURRENT_USER_QUERY from '../../queries/loggedInUser.graphql'
+import AuthForm from '../AuthForm'
 import Modal from '../Modal'
 import Toggle from '../Toggle'
 
 const SigninRequired = props => (
   <Query query={CURRENT_USER_QUERY} fetchPolicy="network-only">
-    {({ data, loading, error, refetch }) => {
+    {({
+      loading, error, data, refetch
+    }) => {
       if (loading) return null
       if (error) return `Error! ${error.message}`
 
       if (!data.loggedInUser.userId) {
         return (
-          <Toggle initial={true}>
+          <Toggle initial>
             {({ on, toggle }) => (
               <>
                 <Modal toggle={toggle} on={on}>
@@ -28,11 +30,11 @@ const SigninRequired = props => (
               </>
             )}
           </Toggle>
-        );
+        )
       }
-      return props.children;
+      return props.children
     }}
   </Query>
-);
+)
 
-export default SigninRequired;
+export default SigninRequired

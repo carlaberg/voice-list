@@ -1,14 +1,15 @@
 import Link from 'next/link';
 import { Query } from 'react-apollo';
 import { withRouter } from 'next/router';
-import { Toggle, Modal } from 'carls-components';
-import { Transition, animated } from 'react-spring';
-import AuthForm from '../AuthForm';
-import Button from '../Button';
+import { Toggle, Modal } from 'carls-components'
+import { Transition, animated } from 'react-spring'
+import AuthForm from '../AuthForm'
+import Button from '../Button'
 import {
-  HeaderWrapper, Home, ButtonWrapper, LoginButtons, SignoutButton
-} from './styles';
-import LOGGED_IN_USER from '../../queries/loggedInUser.graphql';
+  HeaderWrapper, HeaderBar, Home, ButtonWrapper, LoginButtons, SignoutButton
+} from './styles'
+import { Halign } from '../../layout/mixins'
+import LOGGED_IN_USER from '../../queries/loggedInUser.graphql'
 
 const Header = props => (
   <Query query={LOGGED_IN_USER} fetchPolicy="network-only">
@@ -106,10 +107,14 @@ const Header = props => (
 
       return (
         <HeaderWrapper>
-          <Link href="/" prefetch>
-            <Home>Voice List</Home>
-          </Link>
-          <ButtonWrapper>{data.loggedInUser.userId ? signoutButton() : loginButton()}</ButtonWrapper>
+          <Halign>
+            <HeaderBar>
+              <Link href="/" prefetch>
+                <Home>Voice List</Home>
+              </Link>
+              <ButtonWrapper>{data.loggedInUser.userId ? signoutButton() : loginButton()}</ButtonWrapper>
+            </HeaderBar>
+          </Halign>
         </HeaderWrapper>
       );
     }}

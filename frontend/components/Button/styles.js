@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { accentRed, fontMedium, borderRadius } from '../../style/variables';
+import styled from 'styled-components'
+import { FontMedium } from '../../layout/mixins'
 
 export const StyledButton = styled.button`
   height: 40px;
@@ -8,9 +8,10 @@ export const StyledButton = styled.button`
   margin-left: 15px;
   cursor: pointer;
   padding: 0 15px;
-  color: ${accentRed.hex};
   text-transform: uppercase;
-  ${fontMedium()};
-  color: ${props => props.theme.textColor};
-  border-radius: ${borderRadius.standard};
-`;
+  ${FontMedium}
+  color: ${props => props.theme.color};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  display: flex;
+  align-items: center;
+`

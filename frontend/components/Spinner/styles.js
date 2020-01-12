@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import * as variables from '../../style/variables';
+import styled from 'styled-components'
+import { FontSmall } from '../../layout/mixins'
 
 export const SpinnerWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background: ${variables.backgroundWhite.hex};
+  background: ${({ theme }) => theme.colorBackground};
   position: absolute;
   display: flex;
   justify-content: center;
@@ -12,20 +12,20 @@ export const SpinnerWrapper = styled.div`
   top: 0;
   left: 0;
   opacity: ${props => (props.loading ? '1' : '0')};
-  transition: opacity ${variables.transitions.slow};
+  transition: opacity ${({ theme }) => theme.transitionRegular};
   pointer-events: none;
-`;
+`
 
 export const SpinnerOuter = styled.div`
   width: 200px;
   overflow: hidden;
-`;
+`
 
 export const SpinnerInner = styled.div`
   width: 0;
   height: 1px;
-  background: ${variables.accentRed.hex};
-  animation: spinner ${variables.transitions.verySlow} infinite;
+  background: ${({ theme }) => theme.colorAccent};
+  animation: ${({ theme }) => `spinner ${theme.transitionSlow} infinite`};
 
   @keyframes spinner {
     0 {
@@ -40,12 +40,12 @@ export const SpinnerInner = styled.div`
       transform: translateX(200px);
     }
   }
-`;
+`
 
 export const SpinnerText = styled.div`
   width: 100%;
-  ${variables.fontSmall()};
-  color: ${variables.accentRed.hex};
+  ${FontSmall}
+  color: ${({ theme }) => theme.colorAccent};
   margin-top: 20px;
   text-align: center;
-`;
+`

@@ -1,0 +1,6 @@
+query {
+  currentList @client {
+    name,
+    items
+  }
+}

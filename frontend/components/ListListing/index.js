@@ -1,21 +1,23 @@
-import { Query } from 'react-apollo';
-import GET_LISTS from '../../queries/lists.graphql';
-import Spinner from '../Spinner';
+import { useQuery } from 'react-apollo'
+import GET_LISTS from '../../queries/lists.graphql'
+import Spinner from '../Spinner'
 
-const ListListing = () => (
-  <Query query={GET_LISTS}>
-    {({ loading, data }) => {
-      if (loading) return <Spinner loading={loading} target="site-container" />;
-      const { allLists: lists } = data;
+const ListListing = () => {
+  const {
+    error,
+    loading,
+    data: { userLists }
+  } = useQuery(GET_LISTS)
 
-      return (
-        <React.Fragment>
-          <h1>HERE IS A LIST</h1>
-          {lists[0].listItems.map((list, index) => <h2 key={index}>{list}</h2>)}
-        </React.Fragment>
-      );
-    }}
-  </Query>
-);
+  if (error) return null
+  if (loading) return <Spinner />
 
-export default ListListing;
+  return (
+    <React.Fragment>
+      <h1>YOUR LISTS</h1>
+      {userLists.map((list, index) => <h2 key={index}>{list.name}: {list.list.map((item) => `${item}, `)}</h2>)}
+    </React.Fragment>
+  )
+}
+
+export default ListListing

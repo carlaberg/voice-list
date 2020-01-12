@@ -1,24 +1,23 @@
-import App, { Container } from 'next/app';
-import React from 'react';
-import { ApolloProvider } from 'react-apollo';
-import { PageTransition } from 'next-page-transitions';
+import App, { Container } from 'next/app'
+import React from 'react'
+import { ApolloProvider } from 'react-apollo'
+import { PageTransition } from 'next-page-transitions'
 import withApolloClient from '../lib/with-apollo-client';
-import Header from '../components/Header';
+import MainLayout from '../layout/MainLayout'
 
 class MyApp extends App {
 
   render() {
-    const { Component, pageProps, apolloClient } = this.props;
+    const { Component, apolloClient, pageProps } = this.props
 
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
-          <div>
-            <Header />
+          <MainLayout>
             <PageTransition timeout={300} classNames="page-transition">
               <Component {...pageProps} />
             </PageTransition>
-          </div>
+          </MainLayout>
         </ApolloProvider>
       </Container>
     );

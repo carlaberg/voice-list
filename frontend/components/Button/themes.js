@@ -1,14 +1,14 @@
-import { accentRed, lightWhite } from '../../style/variables';
+import { theme } from '../../layout/theme'
 
 export default {
   dark: {
-    backgroundColor: accentRed.hex,
-    textColor: lightWhite.hex,
+    backgroundColor: theme.colorAccent,
+    color: theme.colorWhite,
     border: 'none'
   },
   light: {
     backgroundColor: 'none',
-    textColor: accentRed.hex,
-    border: `2px solid ${accentRed.hex}`
+    color: theme.colorAccent,
+    border: `2px solid ${theme.colorAccent}`
   }
-};
+}

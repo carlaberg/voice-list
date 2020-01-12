@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <g id="ICONS" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ham-vit-Close" transform="translate(-41.000000, -1.000000)" fill="#46D1BD">
+            <g id="Group-2" transform="translate(41.000000, 1.000000)">
+                <g id="Group" transform="translate(6.000000, 6.000000) scale(-1, 1) rotate(-315.000000) translate(-6.000000, -6.000000) translate(5.000000, -1.000000)">
+                    <circle id="Oval" cx="1" cy="1" r="1"></circle>
+                    <circle id="Oval-Copy" cx="1" cy="7" r="1"></circle>
+                    <circle id="Oval-Copy-2" cx="1" cy="13" r="1"></circle>
+                </g>
+                <g id="Group-Copy" transform="translate(6.000000, 6.000000) scale(-1, 1) rotate(-45.000000) translate(-6.000000, -6.000000) translate(5.000000, -1.000000)">
+                    <circle id="Oval" cx="1" cy="1" r="1"></circle>
+                    <circle id="Oval-Copy" cx="1" cy="7" r="1"></circle>
+                    <circle id="Oval-Copy-2" cx="1" cy="13" r="1"></circle>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

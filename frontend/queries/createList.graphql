@@ -1,0 +1,7 @@
+mutation CreateList($input: CreateListInput!) {
+  createList(input: $input) {
+    _id
+    name
+    list
+  }
+}

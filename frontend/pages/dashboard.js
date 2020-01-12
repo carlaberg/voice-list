@@ -1,33 +1,25 @@
-import { withRouter } from 'next/router';
-import { Query } from 'react-apollo';
-import LOGGED_IN_USER from '../queries/loggedInUser.graphql';
-import BaseLayout from '../components/BaseLayout';
-import Spinner from '../components/Spinner';
+import styled from 'styled-components'
 import SigninRequired from '../components/SigninRequired'
+import Tabs from '../components/Tabs'
+import ListMaker from '../components/ListMaker'
+import ListListing from '../components/ListListing'
+import { Section, HalignSmall } from '../layout/mixins'
 
-class Dashboard extends React.Component {
+const Tab = styled.div`
+  width: 100%;
+`
 
-  render() {
-    return (
-      <SigninRequired>
-        <BaseLayout>Dashboard</BaseLayout>
-      </SigninRequired>
-      // <Query query={LOGGED_IN_USER} fetchPolicy="network-only">
-      //   {({ loading, error, data, refetch }) => {
-      //     if (loading) return 'Loading...';
-      //     if (error) return `Error! ${error.message}`;
-      //     // if (!data.loggedInUser.userId) {
-      //     //   // Router.replace('/')
-      //     //   return null
-      //     // }
-      //     // refetch()
-      //     // console.log(data)
-
-      //     return <BaseLayout>Dashboard</BaseLayout>;
-      //   }}
-      // </Query>
-    );
-  }
-}
-
-export default withRouter(Dashboard)
+const Dashboard = () => (
+  <SigninRequired>
+    <Section>
+      <HalignSmall>
+        <Tabs>
+          <Tab id="1" title="Lists"><ListListing /></Tab>
+          <Tab id="2" title="Create List"><ListMaker /></Tab>
+          <Tab id="3" title="Profile">Tab3 content</Tab>
+        </Tabs>
+      </HalignSmall>
+    </Section>
+  </SigninRequired>
+)
+export default Dashboard

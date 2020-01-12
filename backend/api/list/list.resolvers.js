@@ -1,9 +1,18 @@
 const List = require('./list.model')
 
+const list = async (_, args, ctx) => {
+  // if (!ctx.request.userId) {
+  //   throw new Error('You must be logged in to see this list')
+  // }
+  
+  return List.findById(args.id)
+    .exec()
+}
+
 const createList = async (_, args, ctx) => {
   // 1. Check if user is logged in
   if (!ctx.request.userId) {
-    throw new Error('You must be logged in to create a post')
+    throw new Error('You must be logged in to create a list')
   }
 
   // Save a post to the database and return the saved post from the resolver
@@ -12,7 +21,7 @@ const createList = async (_, args, ctx) => {
 
 const userLists = async (_, __, ctx) => {
   if (!ctx.request.userId) {
-    throw new Error('You must be logged in to query a post')
+    throw new Error('You must be logged in to query a list')
   }
   
   return List.find({ createdBy: ctx.request.userId })
@@ -21,7 +30,7 @@ const userLists = async (_, __, ctx) => {
 
 const updateList = async (_, args, ctx) => {
   if (!ctx.request.userId) {
-    throw new Error('You must be logged in to update a post')
+    throw new Error('You must be logged in to update a list')
   }
   
   const update = args.input
@@ -32,7 +41,7 @@ const updateList = async (_, args, ctx) => {
 
 const deleteList = async (_, args, ctx) => {
   if (!ctx.request.userId) {
-    throw new Error('You must be logged in to delete a post')
+    throw new Error('You must be logged in to delete a list')
   }
   
   return List.findByIdAndRemove(args.id)
@@ -41,6 +50,7 @@ const deleteList = async (_, args, ctx) => {
 
 module.exports = {
   Query: {
+    list,
     userLists
   },
   Mutation: {

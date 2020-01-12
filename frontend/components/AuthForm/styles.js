@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import * as variables from '../../style/variables';
+import styled from 'styled-components'
+import { FontMedium, FontLarge } from '../../layout/mixins'
 
 export const FormWrapper = styled.form`
   width: 400px;
@@ -8,30 +8,30 @@ export const FormWrapper = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: ${variables.backgroundWhite.hex};
-  border-radius: ${variables.borderRadius.standard};
+  background: ${({ theme }) => theme.colorBackground};
+  border-radius: ${({ theme }) => theme.borderRadius};
   padding: 40px;
-`;
+`
 
 export const FormTitle = styled.div`
-  ${variables.fontLarge()};
-  color: ${variables.gray.hex};
+  ${FontLarge}
+  color: ${({ theme }) => theme.colorGray};
   text-transform: uppercase;
   margin-bottom: 40px;
-`;
+`
 
 export const InputGroup = styled.div`
-  background: ${variables.lightWhite.hex};
+  background: ${({ theme }) => theme.colorWhite};
   width: 100%;
   padding: 20px 40px;
   margin-bottom: 40px;
-  border-radius: ${variables.borderRadius.standard};
-`;
+  border-radius: ${({ theme }) => theme.borderRadius};
+`
 
 export const BackendMessage = styled.div`
   width: 100%;
   text-align: center;
-  ${variables.fontMedium()}
-  color: ${variables.gray.hex};
+  ${FontMedium}
+  color: ${({ theme }) => theme.colorGray};
   margin-bottom: 40px;
-`;
+`

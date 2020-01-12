@@ -1,9 +1,8 @@
-import { TestButton } from 'carls-components';
-import BaseLayout from '../components/BaseLayout';
-import ListListing from '../components/ListListing';
+import { TestButton } from 'carls-components'
+import ListListing from '../components/ListListing'
 
 export default () => (
-  <BaseLayout>
+  <div>
     {/* <ListListing /> */}
-  </BaseLayout>
-);
+  </div>
+)

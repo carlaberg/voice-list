@@ -1,0 +1,6 @@
+query List($id: ID!) {
+  list(id: $id) {
+    _id
+    name
+  }
+}

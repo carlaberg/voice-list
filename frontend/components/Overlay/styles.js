@@ -1,5 +1,4 @@
-import styled from 'styled-components';
-import { borderRadius, transitions } from '../../style/variables';
+import styled from 'styled-components'
 
 export const OverlayWrapper = styled.div`
   position: absolute;
@@ -7,10 +6,10 @@ export const OverlayWrapper = styled.div`
   width: 100%;
   top: 0;
   bottom: 0;
-  background: ${props => props.background};
+  background: ${({ theme }) => theme.colorBackground};
   z-index: 9999;
-  border-radius: ${borderRadius.standard};
-  transition: opacity ${transitions.slow};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  transition: opacity ${({ theme }) => theme.transitionRegular};
   opacity: ${props => (props.loading ? '1' : '0')};
   pointer-events: none;
-`;
+`
