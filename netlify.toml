@@ -1,14 +1,11 @@
 [build]
   command = "npm run build"
   functions = "functions/"
-  publish = "public/"
+  publish = "frontend/.next"
 
 [build.environment]
   API_HOST_PROD = "https://voice-list.netlify.com/.netlify/functions/graphql-api"
   API_HOST_DEV = "http://localhost:34567/.netlify/functions/graphql-api"
-
-[dev]
-  publish = "public/"
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
