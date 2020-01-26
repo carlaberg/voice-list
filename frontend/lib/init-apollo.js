@@ -3,6 +3,12 @@ import { persistCache } from 'apollo-cache-persist'
 import fetch from 'isomorphic-unfetch'
 import { setContext } from 'apollo-link-context'
 
+const {
+  API_HOST_DEV,
+  API_HOST_PROD,
+  NODE_ENV
+} = process.env
+
 let apolloClient = null
 
 // Polyfill fetch() on the server (used by apollo-client)
@@ -13,7 +19,7 @@ if (!process.browser) {
 }
 
 const httpLink = new HttpLink({
-  uri: process.env.API_HOST, // Server URL (must be absolute)
+  uri: NODE_ENV === 'production' ? API_HOST_PROD : API_HOST_DEV, // Server URL (must be absolute)
   credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
 })
 
