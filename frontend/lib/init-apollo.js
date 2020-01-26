@@ -19,7 +19,7 @@ if (!process.browser) {
 }
 
 const httpLink = new HttpLink({
-  uri: 'https://voice-list.netlify.com/.netlify/functions/graphql-api', // Server URL (must be absolute)
+  uri: 'https://test--voice-list.netlify.com/.netlify/functions/graphql-api', // Server URL (must be absolute)
   // uri: 'NODE_ENV === 'production' ? API_HOST_PROD : API_HOST_DEV', // Server URL (must be absolute)
   credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
 })
