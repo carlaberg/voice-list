@@ -1,8 +1,8 @@
 .DS_Store
 
-backend/node_modules
-backend/docker/data
-backend/.env
+functions/node_modules
+functions/docker/data
+functions/.env
 
 frontend/node_modules
 frontend/.env
