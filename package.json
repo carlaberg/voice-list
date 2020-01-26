@@ -1,0 +1,13 @@
+{
+  "name": "voice-list-root",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "netlify-lambda": "^1.6.3"
+  },
+  "scripts": {
+    "dev": "parcel frontend/index.html",
+    "prebuild" : "cd functions && npm i",
+    "build": "cd frontend && npm install && npm run build"
+  }
+}
