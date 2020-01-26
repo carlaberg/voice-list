@@ -8,6 +8,6 @@
   "scripts": {
     "dev": "parcel frontend/index.html",
     "prebuild" : "cd functions && npm i",
-    "build": "cd frontend && npm install && npm run build"
+    "build": "cd frontend && npm install && npm run export"
   }
 }
