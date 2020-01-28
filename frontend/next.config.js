@@ -14,10 +14,16 @@ const nextConfig = {
         path: path.join(__dirname, '.env'),
         systemvars: true
       })
-    ];
+    ]
 
     return config;
+  },
+  exportPathMap: function() {
+    return {
+      '/': { page: '/' },
+      '/dashboard': { page: '/dashboard' }
+    }
   }
-};
+}
 
 module.exports = withPlugins([], nextConfig);
