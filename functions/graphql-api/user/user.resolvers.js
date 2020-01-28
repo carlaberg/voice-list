@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt')
+const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const user = () => {
@@ -16,7 +16,7 @@ const createUser = async (_, args, ctx) => {
     throw new Error('User already exists');
   }
 
-  const hash = await bcrypt.hash(args.input.password, 12)
+  const hash = await bcryptjs.hash(args.input.password, 12)
 
   const user = await ctx.models.user.create({
     email: args.input.email,
@@ -42,7 +42,7 @@ const loginUser = async (_, args, ctx) => {
     throw new Error('User not found')
   }
 
-  const isEqual = await bcrypt.compare(args.input.password, user.password)
+  const isEqual = await bcryptjs.compare(args.input.password, user.password)
 
   if (!isEqual) {
     throw new Error('Password is not correct')

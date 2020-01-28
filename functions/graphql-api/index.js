@@ -17,7 +17,7 @@ module.exports = {
     if (authHeader) { 
       const token = authHeader.split(' ')[1]
       try {
-        const { userId } = jwt.verify(token, process.env.JWT_SECRET)
+        const { userId } = jwt.verify(token, 'mysecretjwtsecret')
         tempUser = userId
   
       } catch (err) {

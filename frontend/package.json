@@ -17,7 +17,6 @@
     "apollo-cache-persist": "^0.1.1",
     "apollo-link-context": "^1.0.18",
     "babel-plugin-import-graphql": "^2.6.2",
-    "bcryptjs": "^2.4.3",
     "carls-components": "0.0.10",
     "dotenv-webpack": "^1.5.7",
     "express": "^4.16.3",
