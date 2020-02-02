@@ -1,7 +1,2 @@
 [dev]
   functions = "../functions/"
-
-[build]
-  command = "npm run build"
-  functions = "functions/"
-  publish = "out"
