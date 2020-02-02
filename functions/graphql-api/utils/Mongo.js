@@ -9,7 +9,9 @@ const MongoConnector = () => {
             NODE_ENV,
             MONGO_HOSTNAME,
             MONGO_PORT,
-            MONGO_DB
+            MONGO_DB,
+            MONGO_USER,
+            MONGO_PASSWORD
         } = process.env;
 
         // Connect to mongodb without authentication in development
