@@ -1,7 +1,7 @@
 .DS_Store
 
 functions/node_modules
-functions/docker/data
+functions/docker/data/**/*
 functions/.env
 
 frontend/node_modules
