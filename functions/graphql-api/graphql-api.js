@@ -1,5 +1,5 @@
 const path = require('path');
-require('dotenv').config({ path: path.resolve('./.env') });
+require('dotenv').config({ path: path.resolve('../.env') });
 const MongoConnector = require('./utils/Mongo');
 const serverless = require("serverless-http");
 const { GraphQLServerLambda } = require('graphql-yoga');
