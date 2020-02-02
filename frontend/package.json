@@ -1,7 +1,7 @@
 {
   "name": "voice-list",
   "scripts": {
-    "dev": "npm run clearbabelcache && node server.js",
+    "dev": "npm run clearbabelcache && NODE_ENV=development node server.js",
     "build": "next build",
     "export": "next export",
     "deploy": "npm run build && npm run export",
@@ -24,9 +24,10 @@
     "graphql": "0.13.0",
     "graphql-request": "^1.4.0",
     "graphql-tag": "^2.9.2",
+    "http-proxy-middleware": "^0.20.0",
     "isomorphic-unfetch": "2.0.0",
     "just-debounce-it": "^1.1.0",
-    "next": "latest",
+    "next": "^9.2.1",
     "next-compose-plugins": "^2.1.1",
     "next-page-transitions": "^1.0.0-alpha.4",
     "prop-types": "15.6.1",

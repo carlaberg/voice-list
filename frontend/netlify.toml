@@ -1,0 +1,17 @@
+[build]
+  base = "frontend/"
+  command = "npm run build"
+  functions = "../functions/"
+  publish = "out"
+
+[dev.environment]
+  NODE_ENV = "development"
+
+[build.environment]
+  NODE_ENV = "development"
+
+[[redirects]]
+  from = "/.netlify/functions/graphql-api"
+  to = "http://localhost:34567/.netlify/functions/graphql-api"
+  status = 200
+  force = true

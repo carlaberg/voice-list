@@ -3,11 +3,9 @@ import { persistCache } from 'apollo-cache-persist'
 import fetch from 'isomorphic-unfetch'
 import { setContext } from 'apollo-link-context'
 
-// const {
-//   API_HOST_DEV,
-//   API_HOST_PROD,
-//   NODE_ENV
-// } = process.env
+const {
+  API_HOST
+} = process.env
 
 let apolloClient = null
 
@@ -19,9 +17,7 @@ if (!process.browser) {
 }
 
 const httpLink = new HttpLink({
-  // uri: 'http://localhost:34567/.netlify/functions/graphql-api', // Server URL (must be absolute)
-  uri: 'https://test--voice-list.netlify.com/.netlify/functions/graphql-api', // Server URL (must be absolute)
-  // uri: 'NODE_ENV === 'production' ? API_HOST_PROD : API_HOST_DEV', // Server URL (must be absolute)
+  uri:`${API_HOST}/.netlify/functions/graphql-api`, // Server URL (must be absolute)
   credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
 })
 

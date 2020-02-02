@@ -2,6 +2,8 @@ const user = require('./user')
 const list = require('./list')
 const merge = require('lodash/merge')
 const middlewares = require('./middlewares')
+const jwt = require('jsonwebtoken')
+
 
 module.exports = {
   typeDefs: [
@@ -12,12 +14,12 @@ module.exports = {
   // middlewares,
   context: (req) => {
     const authHeader = req.event.headers.authorization
-    const tempUser = null
+    let tempUser = null
 
     if (authHeader) { 
       const token = authHeader.split(' ')[1]
       try {
-        const { userId } = jwt.verify(token, 'mysecretjwtsecret')
+        const { userId } = jwt.verify(token, process.env.JWT_SECRET)
         tempUser = userId
   
       } catch (err) {

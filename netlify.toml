@@ -1,15 +1,5 @@
 [build]
+  base = "frontend/"
   command = "npm run build"
   functions = "functions/"
-  publish = "out"
-
-[build.environment]
-  API_HOST_PROD = "https://voice-list.netlify.com/.netlify/functions/graphql-api"
-  API_HOST_DEV = "http://localhost:34567/.netlify/functions/graphql-api"
-
-[[headers]]
-  # Define which paths this specific [[headers]] block will cover.
-  for = "/.netlify/functions/graphql-api"
-    [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "POST, GET, OPTIONS"
+  publish = "out/"

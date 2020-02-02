@@ -1,5 +1,6 @@
 const express = require('express');
 const next = require('next');
+const proxy = require('http-proxy-middleware');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -9,6 +10,8 @@ app
   .prepare()
   .then(() => {
     const server = express();
+
+    server.use('/.netlify/functions/graphql-api', proxy({ target: 'http://localhost:34567', changeOrigin: true }))
 
     server.get('/dashboard/:id', (req, res) => {
       const actualPage = '/about';
