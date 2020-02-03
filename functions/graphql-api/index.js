@@ -1,9 +1,10 @@
 const user = require('./user')
 const list = require('./list')
 const merge = require('lodash/merge')
-const middlewares = require('./middlewares')
+const {
+  closeDbConnection
+} = require('./middlewares')
 const jwt = require('jsonwebtoken')
-
 
 module.exports = {
   typeDefs: [
@@ -11,7 +12,7 @@ module.exports = {
     list.typeDefs
   ].join(' '),
   resolvers: merge({}, user.resolvers, list.resolvers),
-  // middlewares,
+  middlewares: [closeDbConnection],
   context: (req) => {
     const authHeader = req.event.headers.authorization
     let tempUser = null
@@ -27,7 +28,7 @@ module.exports = {
       }
     }
     
-    return { 
+    return {
       ...req,
       request: {
         userId: tempUser

@@ -20,6 +20,10 @@ const MongoConnector = () => {
         return dbInstance;
     }
 
+    function closeConnection() {
+        return mongoose.connection.close;
+    }
+
     return Object.freeze({
         initDb,
         getDb

@@ -112,7 +112,7 @@ const Header = props => (
               <Link href="/" prefetch>
                 <Home>Voice List</Home>
               </Link>
-              <ButtonWrapper>{data.loggedInUser.userId ? signoutButton() : loginButton()}</ButtonWrapper>
+              <ButtonWrapper>{data.loggedInUser && data.loggedInUser.userId ? signoutButton() : loginButton()}</ButtonWrapper>
             </HeaderBar>
           </Halign>
         </HeaderWrapper>

@@ -1,24 +1,19 @@
-// const jwt = require('jsonwebtoken')
-// const path = require('path')
-// require('dotenv').config({ path: path.join(__dirname, '.env') })
+const mongoose = require('mongoose');
 
-// const authentication = async (resolve, root, args, context, info) => {
-//   const authHeader = context.event.headers['Authorization']
-
-//   if (authHeader) { 
-//     const token = authHeader.split(' ')[1]
-//     try {
-//       const { userId } = jwt.verify(token, process.env.JWT_SECRET)
-//       context.event.body.userId = userId
-
-//     } catch (err) {
-//       console.error(err)
-//     }
-//   }
-  
-// }
-
-// module.exports = [
-//   authentication
-// ]
-
+exports.closeDbConnection = async (resolve, root, args, context, info) => {
+  console.log('before resolver');
+  try {
+    await mongoose.connect(process.env.MONGO_CONNECTION_STR, { 
+        useNewUrlParser: true,
+        useUnifiedTopology: true 
+    });
+    console.log('successfully connected to mongodb');
+    const result = await resolve(root, args, context, info);
+    console.log('after resolver');
+    mongoose.connection.close();
+    return result;
+    
+  } catch (error) {
+      console.error(error);
+  } 
+}
