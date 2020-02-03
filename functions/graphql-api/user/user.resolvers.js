@@ -61,6 +61,8 @@ const loginUser = async (_, args, ctx) => {
 }
 
 const loggedInUser = (_, args, ctx) => {
+  console.log('bulle')
+  console.log('ctx: ', ctx)
   return {
     userId: ctx.request.userId 
   }
