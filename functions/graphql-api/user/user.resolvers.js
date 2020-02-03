@@ -1,5 +1,6 @@
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
 
 const user = () => {
   return {
@@ -10,29 +11,44 @@ const user = () => {
 }
 
 const createUser = async (_, args, ctx) => {
-  const existingUser = await ctx.models.user.findOne({email: args.input.email});
+  try {
+      dbInstance = await mongoose.connect(process.env.MONGO_CONNECTION_STR, { 
+          useNewUrlParser: true,
+          useUnifiedTopology: true 
+      });
+      console.log('successfully connected to mongodb');
 
-  if (existingUser) {
-    throw new Error('User already exists');
+      // Do things with database
+      const existingUser = await ctx.models.user.findOne({email: args.input.email});
+
+      if (existingUser) {
+        throw new Error('User already exists');
+      }
+    
+      const hash = await bcryptjs.hash(args.input.password, 12)
+    
+      const user = await ctx.models.user.create({
+        email: args.input.email,
+        password: hash
+      })
+    
+      const token = jwt.sign(
+        {
+          userId: user._id.toString(),
+          email: user.email
+        }, 
+        process.env.JWT_SECRET,
+        { expiresIn: '1h' }
+      )
+      
+      // Close connection to database so that function doesn't time out
+      mongoose.connection.close();
+
+      // return response
+      return { token, userId: user._id.toString() }
+  } catch (error) {
+      console.error(error);
   }
-
-  const hash = await bcryptjs.hash(args.input.password, 12)
-
-  const user = await ctx.models.user.create({
-    email: args.input.email,
-    password: hash
-  })
-
-  const token = jwt.sign(
-    {
-      userId: user._id.toString(),
-      email: user.email
-    }, 
-    process.env.JWT_SECRET,
-    { expiresIn: '1h' }
-  )
-
-  return { token, userId: user._id.toString() }
 }
 
 const loginUser = async (_, args, ctx) => {
