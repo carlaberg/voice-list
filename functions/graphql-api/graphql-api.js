@@ -6,7 +6,7 @@ const { GraphQLServerLambda } = require('graphql-yoga');
 const gqlServerConfig = require('.');
 
 // Connect to database
-MongoConnector.initDb();
+// MongoConnector.initDb();
 
 const serverOptions = {
   port: 5000,
