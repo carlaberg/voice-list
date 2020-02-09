@@ -9,6 +9,7 @@
   "author": "Carl Åberg",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-lambda": "^2.10.0",
     "aws-lambda": "^1.0.5",
     "bcryptjs": "^2.4.3",
     "dotenv": "^8.0.0",
