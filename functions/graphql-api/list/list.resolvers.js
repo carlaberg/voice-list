@@ -1,6 +1,7 @@
 const List = require('./list.model')
 
 const list = async (_, args, ctx) => {
+  ctx.callbackWaitsForEmptyEventLoop = false
   // if (!ctx.request.userId) {
   //   throw new Error('You must be logged in to see this list')
   // }
@@ -10,6 +11,7 @@ const list = async (_, args, ctx) => {
 }
 
 const createList = async (_, args, ctx) => {
+  ctx.callbackWaitsForEmptyEventLoop = false
   // 1. Check if user is logged in
   if (!ctx.request.userId) {
     throw new Error('You must be logged in to create a list')
@@ -20,6 +22,7 @@ const createList = async (_, args, ctx) => {
 }
 
 const userLists = async (_, __, ctx) => {
+  ctx.callbackWaitsForEmptyEventLoop = false
   if (!ctx.request.userId) {
     throw new Error('You must be logged in to query a list')
   }
@@ -29,6 +32,7 @@ const userLists = async (_, __, ctx) => {
 }
 
 const updateList = async (_, args, ctx) => {
+  ctx.callbackWaitsForEmptyEventLoop = false
   if (!ctx.request.userId) {
     throw new Error('You must be logged in to update a list')
   }
@@ -40,6 +44,7 @@ const updateList = async (_, args, ctx) => {
 }
 
 const deleteList = async (_, args, ctx) => {
+  ctx.callbackWaitsForEmptyEventLoop = false
   if (!ctx.request.userId) {
     throw new Error('You must be logged in to delete a list')
   }

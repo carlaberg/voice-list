@@ -10,6 +10,7 @@ const user = () => {
 }
 
 const createUser = async (_, args, ctx) => {
+  ctx.callbackWaitsForEmptyEventLoop = false
   const existingUser = await ctx.models.user.findOne({email: args.input.email});
 
   if (existingUser) {
@@ -36,6 +37,7 @@ const createUser = async (_, args, ctx) => {
 }
 
 const loginUser = async (_, args, ctx) => {
+  ctx.callbackWaitsForEmptyEventLoop = false
   const user = await ctx.models.user.findOne({email: args.input.email})
   
   if (!user) {
@@ -61,6 +63,7 @@ const loginUser = async (_, args, ctx) => {
 }
 
 const loggedInUser = (_, args, ctx) => {
+  ctx.callbackWaitsForEmptyEventLoop = false
   return {
     userId: ctx.request.userId 
   }

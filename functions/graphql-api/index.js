@@ -1,10 +1,15 @@
 const user = require('./user')
 const list = require('./list')
 const merge = require('lodash/merge')
+const MongoConnector = require('./utils/Mongo')
+
 const {
-  closeDbConnection
+  // closeDbConnection
 } = require('./middlewares')
 const jwt = require('jsonwebtoken')
+
+// Init DB
+const dbConnection = MongoConnector.initDb()
 
 module.exports = {
   typeDefs: [
@@ -12,7 +17,7 @@ module.exports = {
     list.typeDefs
   ].join(' '),
   resolvers: merge({}, user.resolvers, list.resolvers),
-  middlewares: [closeDbConnection],
+  // middlewares: [closeDbConnection],
   context: (req) => {
     const authHeader = req.event.headers.authorization
     let tempUser = null
