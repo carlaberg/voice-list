@@ -1,5 +1,6 @@
 query {
   userLists {
+    _id
     name
     list
   }
