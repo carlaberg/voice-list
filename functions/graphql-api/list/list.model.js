@@ -6,7 +6,7 @@ const listSchema = new mongoose.Schema({
     unique: true
   },
   list: {
-    type: [String],
+    type: [Object],
     required: true
   },
   createdBy: {
