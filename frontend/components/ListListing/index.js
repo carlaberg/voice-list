@@ -5,11 +5,17 @@ import { groupBy, values } from 'lodash'
 import {
   Heading1,
   Heading2,
+  ListContainer,
   List,
-  ListItem
+  ListItem,
+  IconGroup,
+  ItemIconGroup,
+  StyledEditableInput,
+  MenuArrow,
+  Trash,
+  Edit
 } from './styles'
 import Spinner from '../Spinner'
-import EditableInput from '../EditableInput'
 
 const ListListing = () => {
   const {
@@ -43,24 +49,36 @@ const ListListing = () => {
       <Heading1>YOUR LISTS</Heading1>
       {userLists.map((list, listIndex) => (
         <React.Fragment key={listIndex}>
-          <Heading2
-            onClick={(e) => {
-              const state = {...visibilityFilter}
-              state[list._id].open = !state[list._id].open
-              setVisibilityFilter(state)
-            }}
+          <ListContainer
+            className={visibilityFilter[list._id].open && 'list--open'}
           >
-            {list.name}
-          </Heading2>
-          <List open={visibilityFilter[list._id].open} key={listIndex}>
-            {list.list.map((item, itemIndex) => (
-              <ListItem key={itemIndex}>
-                <EditableInput
-                  defaultValue={item}
-                />
-              </ListItem>
-            ))}
-          </List>
+            <Heading2
+              onClick={(e) => {
+                const state = {...visibilityFilter}
+                state[list._id].open = !state[list._id].open
+                setVisibilityFilter(state)
+              }}
+            >
+              {list.name}
+              <IconGroup>
+                <Trash />
+                <MenuArrow />
+              </IconGroup>
+            </Heading2>
+            <List key={listIndex}>
+              {list.list.map((item, itemIndex) => (
+                <ListItem key={itemIndex}>
+                  <StyledEditableInput
+                    defaultValue={item}
+                  />
+                <ItemIconGroup>
+                  <Edit />
+                  <Trash />
+                </ItemIconGroup>
+                </ListItem>
+              ))}
+            </List>
+          </ListContainer>
         </React.Fragment>
       ))}
     </React.Fragment>

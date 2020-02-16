@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 import { FontLarge, FontMedium } from '../../layout/mixins'
+import MenuArrowRightIcon from '../../layout/icons/menu-arrow-right.svg'
+import TrashIcon from '../../layout/icons/trash.svg'
+import EditIcon from '../../layout/icons/edit.svg'
+import EditableInput from '../EditableInput'
 
 export const Heading1 = styled.h1`
   ${FontLarge}
@@ -8,31 +12,111 @@ export const Heading1 = styled.h1`
 
 export const Heading2 = styled.h2`
   ${FontMedium}
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.colorAccent};
   margin-bottom: ${({ theme }) => theme.gutter};
   cursor: pointer;
+  padding: 1rem;
+  border: 2px solid ${({ theme }) => theme.colorAccent};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:hover {
+    background: ${({ theme }) => theme.colorAccent};
+    color: ${({ theme }) => theme.colorWhite};
+  }
+
+  .list--open & {
+    background: ${({ theme }) => theme.colorAccent};
+    color: ${({ theme }) => theme.colorWhite};
+    margin-bottom: 0;
+  }
+`
+
+export const IconGroup = styled.div`
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-left: ${({ theme }) => theme.gutterSmall};
+  }
+
+  svg:first-of-type {
+    margin: 0;
+  }
 `
 
 export const ListContainer = styled.div``
 
 export const List = styled.ul`
-  margin-bottom: ${({ theme }) => theme.gutterLarge};
-  border: 1px solid ${({ theme }) => theme.colorAccent};
   background: ${({ theme }) => theme.colorWhite};
-  padding: ${({ theme }) => theme.gutterSmall};
+  margin-bottom: ${({ theme }) => theme.gutter};
+  border: 1px solid ${({ theme }) => theme.colorAccent};
+  border-top: none;
+  display: none;
 
-  ${({ open, theme }) => !open && `
-    height: 0;
-    overflow: hidden;
-    border: none;
-    padding: 0;
-    margin-bottom: 0;
-  `}
+  .list--open & {
+    display: block;
+  }
 `
 
 export const ListItem = styled.li`
+  position: relative;
+  padding: 0.5rem 1rem;
 
   &:hover {
     background: ${({ theme }) => theme.colorGrayOpacity};
     color: ${({ theme }) => theme.colorWhite};
   }
+`
+
+export const StyledEditableInput = styled(EditableInput)``
+
+export const ItemIconGroup = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding-right: 1rem;
+  display: none;
+
+  ${ListItem}:hover & {
+    display: flex;
+    align-items: center;
+  }
+
+  svg {
+    margin-left: ${({ theme }) => theme.gutterSmall};
+    color: ${({ theme }) => theme.colorGray};
+    cursor: pointer;
+  }
+
+  svg:first-of-type {
+    margin: 0;
+  }
+
+  svg:hover {
+    color: ${({ theme }) => theme.colorAccent};
+  }
+`
+
+export const MenuArrow = styled(MenuArrowRightIcon)`
+  width: ${({ theme }) => theme.iconSize};
+  height: ${({ theme }) => theme.iconSize};
+
+  .list--open & {
+    transform: rotate(90deg);
+  }  
+`
+
+export const Trash = styled(TrashIcon)`
+  width: ${({ theme }) => theme.iconSize};
+  height: ${({ theme }) => theme.iconSize};
+`
+
+export const Edit = styled(EditIcon)`
+  width: ${({ theme }) => theme.iconSize};
+  height: ${({ theme }) => theme.iconSize};
 `

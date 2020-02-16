@@ -38,6 +38,8 @@ class Theme {
     this.borderRadius = '2px'
     this.borderRadiusLarge = '10px'
 
+    this.iconSize = '1rem'
+
     this.transitionRegular = '0.7s cubic-bezier(0.19, 1, 0.22, 1)'
     this.transitionSlow = '1.5s cubic-bezier(0.19, 1, 0.22, 1)'
 

@@ -7,12 +7,15 @@ class EditableInput extends React.Component {
     super(props);
 
     this.state = {
-      editable: false
+      editable: false,
+      showIndicators: false
     }
   }
 
   render() {
     const { editable } = this.state
+    const { showIndicators } = this.state
+    const { message, valid, showMessage } = this.props
     return (
       <InputWrapper className={this.props.className} onClick={() => this.setState({ showIndicators: true })}>
         <StyledInput
@@ -21,6 +24,11 @@ class EditableInput extends React.Component {
           onFocus={() => this.setState({ editable: !editable })}
           onBlur={() => this.setState({ editable: !editable })}
         />
+        <Underline />
+        {/* <Message message={message} show={showMessage}>
+          {message}
+        </Message>
+        <Indicator show={showIndicators} valid={valid} /> */}
       </InputWrapper>
     );
   }
