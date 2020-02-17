@@ -2,3 +2,9 @@
   command = "npm run build"
   functions = "functions/"
   publish = "frontend/out/"
+
+[context.develop.environment]
+  API_HOST = "https://develop--voice-list.netlify.com"
+
+[context.production.environment]
+  API_HOST = "https://voice-list.netlify.com"
