@@ -1,7 +1,10 @@
 query {
   userLists {
+		name
     _id
-    name
-    list
+    items {
+      _id
+      text
+    }
   }
 }

@@ -5,10 +5,10 @@ const listSchema = new mongoose.Schema({
     required: true,
     unique: true
   },
-  list: {
-    type: [Object],
-    required: true
-  },
+  items: [{
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: 'listitem'
+  }],
   createdBy: {
     type: mongoose.SchemaTypes.ObjectId,
     required: true,

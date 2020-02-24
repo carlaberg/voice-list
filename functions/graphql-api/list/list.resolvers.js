@@ -1,9 +1,10 @@
 const List = require('./list.model')
+const ListItem = require('../listitem/listitem.model')
 
 const list = async (_, args, ctx) => {
-  // if (!ctx.request.userId) {
-  //   throw new Error('You must be logged in to see this list')
-  // }
+  if (!ctx.request.userId) {
+    throw new Error('You must be logged in to see this list')
+  }
   
   return List.findById(args.id)
     .exec()
@@ -16,15 +17,36 @@ const createList = async (_, args, ctx) => {
   }
 
   // Save a post to the database and return the saved post from the resolver
-  return List.create({ ...args.input, createdBy: ctx.request.userId })
+  return List.create({ ...args.input, createdBy: 'ctx.request.userId' })
+}
+
+const createListWithItems = async (_, args, ctx) => {
+  // 1. Check if user is logged in
+  if (!ctx.request.userId) {
+    throw new Error('You must be logged in to create a list')
+  }
+
+  // Save a post to the database and return the saved post from the resolver
+  const list = await List.create({
+    name: args.input.name,
+    createdBy: ctx.request.userId })
+
+    const listItems = args.input.items.map((item) => {
+      return {
+        text: item,
+        list: list._id
+      }
+    })
+    await ListItem.create(listItems)
+    return list
 }
 
 const userLists = async (_, __, ctx) => {
-  if (!ctx.request.userId) {
-    throw new Error('You must be logged in to query a list')
-  }
+  // if (!ctx.request.userId) {
+  //   throw new Error('You must be logged in to query a list')
+  // }
   
-  return List.find({ createdBy: ctx.request.userId })
+  return List.find({ createdBy: '5e45b5946397c79206dbe41d' })
     .exec()
 }
 
@@ -55,7 +77,13 @@ module.exports = {
   },
   Mutation: {
     createList,
+    createListWithItems,
     updateList,
     deleteList
+  },
+  List: {
+    async items(list, _, { models }) {
+      return await models.listitem.find({ list: list._id })
+    }
   }
 }

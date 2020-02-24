@@ -3,18 +3,21 @@
 type List {
   _id: ID!
   name: String!
-  list: [String!]!
+  items: [ListItem]!
   createdBy: User!
 }
 
 input CreateListInput {
   name: String!
-  list: [String!]!
+}
+
+input CreateListWithItemsInput {
+  name: String!
+  items: [String!]!
 }
 
 input UpdateListInput {
   name: String
-  list: [String]
 }
 
 extend type Query {
@@ -24,6 +27,7 @@ extend type Query {
 
 extend type Mutation {
   createList(input: CreateListInput!): List!
+  createListWithItems(input: CreateListWithItemsInput!): List!
   updateList(id: ID!, input: UpdateListInput!): List!
   deleteList(id: ID!): List!
 }
