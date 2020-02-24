@@ -70,9 +70,18 @@ export const ListItem = styled.li`
     background: ${({ theme }) => theme.colorGrayOpacity};
     color: ${({ theme }) => theme.colorWhite};
   }
+
+  .active&:hover {
+    background: none;
+    cursor: text;
+  }
 `
 
-export const StyledEditableInput = styled(EditableInput)``
+export const StyledEditableInput = styled(EditableInput)`
+  .active & {
+    cursor: text;
+  } 
+`
 
 export const ItemIconGroup = styled.div`
   position: absolute;

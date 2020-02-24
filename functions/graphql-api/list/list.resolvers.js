@@ -42,11 +42,11 @@ const createListWithItems = async (_, args, ctx) => {
 }
 
 const userLists = async (_, __, ctx) => {
-  // if (!ctx.request.userId) {
-  //   throw new Error('You must be logged in to query a list')
-  // }
+  if (!ctx.request.userId) {
+    throw new Error('You must be logged in to query a list')
+  }
   
-  return List.find({ createdBy: '5e45b5946397c79206dbe41d' })
+  return List.find({ createdBy: ctx.request.userId })
     .exec()
 }
 
@@ -83,7 +83,9 @@ module.exports = {
   },
   List: {
     async items(list, _, { models }) {
-      return await models.listitem.find({ list: list._id })
+      const items = await models.listitem.find({ list: list._id })
+      console.log(items)
+      return items
     }
   }
 }
