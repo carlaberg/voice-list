@@ -5,25 +5,26 @@ import debounce from 'just-debounce-it'
 import {
   Wrapper, ListInput, Form, SubmitButton, ListItem, InputGroup
 } from './styles'
-import CREATE_LIST from '../../queries/createList.graphql'
+// import CREATE_LIST from '../../queries/createList.graphql'
+import CREATE_LIST_WITH_ITEMS from '../../queries/createListWithItems.graphql'
 import CURRENT_LIST from '../../queries/currentList.graphql'
 import GET_LISTS from '../../queries/lists.graphql'
 
 const UPDATE_CURRENT_LIST = gql`
-  mutation UpdateCurrentList($name: String!, $list: [String!]!) {
-      updateCurrentList(name: $name, list: $list) @client
+  mutation UpdateCurrentList($name: String!, $items: [String!]!) {
+      updateCurrentList(name: $name, items: $items) @client
   }
 `
 
 const ListMaker = (props) => {
-  const [createList, { error, data }] = useMutation(
-    CREATE_LIST,
+  const [createListWithItems, { error, data }] = useMutation(
+    CREATE_LIST_WITH_ITEMS,
     {
       update(cache, { data: { createList } }) {
         const { userLists } = cache.readQuery({ query: GET_LISTS })
         cache.writeQuery({
           query: GET_LISTS,
-          data: { userLists: userLists.concat([createList])}
+          data: { userLists: userLists.concat([createListWithItems])}
         })
       }
     }
@@ -57,7 +58,7 @@ const ListMaker = (props) => {
     updateCurrentList({
       variables: {
         name: listname,
-        list: items
+        items
       }
     })
   }
@@ -104,11 +105,11 @@ const ListMaker = (props) => {
           e.preventDefault()
           // updateMessages()
           if (items.length < 1 || !listname) return
-          createList({
+          createListWithItems({
             variables: {
               input: {
                 name: listname,
-                list: items
+                items
               }
             }
           })
