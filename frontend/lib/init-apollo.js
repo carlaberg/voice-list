@@ -63,7 +63,7 @@ function create(initialState) {
           const currentList = {
             __typename: 'CurrentList',
             name: args.name,
-            items: args.list
+            items: args.items
           }
           cache.writeData({ data: { currentList } })
 

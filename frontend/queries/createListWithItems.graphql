@@ -1,0 +1,10 @@
+mutation CreateListWithItems($input: CreateListWithItemsInput!) {
+  createListWithItems(input: $input) {
+    _id
+    name
+    items {
+      _id
+      text
+    }
+  }
+}

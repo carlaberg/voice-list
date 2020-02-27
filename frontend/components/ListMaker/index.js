@@ -5,25 +5,25 @@ import debounce from 'just-debounce-it'
 import {
   Wrapper, ListInput, Form, SubmitButton, ListItem, InputGroup
 } from './styles'
-import CREATE_LIST from '../../queries/createList.graphql'
+import CREATE_LIST_WITH_ITEMS from '../../queries/createListWithItems.graphql'
 import CURRENT_LIST from '../../queries/currentList.graphql'
 import GET_LISTS from '../../queries/lists.graphql'
 
 const UPDATE_CURRENT_LIST = gql`
-  mutation UpdateCurrentList($name: String!, $list: [String!]!) {
-      updateCurrentList(name: $name, list: $list) @client
+  mutation UpdateCurrentList($name: String!, $items: [String!]!) {
+      updateCurrentList(name: $name, items: $items) @client
   }
 `
 
 const ListMaker = (props) => {
-  const [createList, { error, data }] = useMutation(
-    CREATE_LIST,
+  const [createListWithItems, { error: createListError, data }] = useMutation(
+    CREATE_LIST_WITH_ITEMS,
     {
-      update(cache, { data: { createList } }) {
+      update(cache, { data: { createListWithItems } }) {
         const { userLists } = cache.readQuery({ query: GET_LISTS })
         cache.writeQuery({
           query: GET_LISTS,
-          data: { userLists: userLists.concat([createList])}
+          data: { userLists: userLists.concat([createListWithItems])}
         })
       }
     }
@@ -37,11 +37,6 @@ const ListMaker = (props) => {
   const [itemMessage, setItemMessage] = useState('')
   const [items, setListitems] = useState(currentListData.currentList ? currentListData.currentList.items : [])
   const [itemsMessage, setItemsMessage] = useState('')
-
-  useEffect(() => {
-    // setListname('kille')
-    // code to run on component mount
-  }, [])
 
   const { data: queryData } = useQuery(CURRENT_LIST)
 
@@ -57,7 +52,18 @@ const ListMaker = (props) => {
     updateCurrentList({
       variables: {
         name: listname,
-        list: items
+        items
+      }
+    })
+  }
+
+  const resetForm = () => {
+    setListitems([])
+    setListname('')
+    updateCurrentList({
+      variables: {
+        name: '',
+        items: []
       }
     })
   }
@@ -92,7 +98,7 @@ const ListMaker = (props) => {
     updateCurrentList({
       variables: {
         name: listname,
-        list: [listitem, ...items]
+        items: [listitem, ...items]
       }
     })
   }
@@ -104,20 +110,18 @@ const ListMaker = (props) => {
           e.preventDefault()
           // updateMessages()
           if (items.length < 1 || !listname) return
-          createList({
+          createListWithItems({
             variables: {
               input: {
                 name: listname,
-                list: items
+                items
               }
             }
           })
-          // updateCurrentList({
-          //   variables: {
-          //     name: 'kissåbajs'
-          //     // list: items
-          //   }
-          // })
+
+          if (!createListError) {
+            resetForm();
+          }
         }}
       >
         <InputGroup>
