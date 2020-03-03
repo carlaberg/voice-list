@@ -70,6 +70,18 @@ const deleteList = async (_, args, ctx) => {
     .exec()
 }
 
+const deleteListAndItems = async (_, args, ctx) => {
+  if (!ctx.request.userId) {
+    throw new Error('You must be logged in to delete a list')
+  }
+  
+  const res = await ListItem.deleteMany({ list: args.id }).exec()
+
+  if (res.ok) {
+    return await List.findByIdAndRemove(args.id).exec()
+  } 
+}
+
 module.exports = {
   Query: {
     list,
@@ -79,12 +91,12 @@ module.exports = {
     createList,
     createListWithItems,
     updateList,
-    deleteList
+    deleteList,
+    deleteListAndItems
   },
   List: {
     async items(list, _, { models }) {
       const items = await models.listitem.find({ list: list._id })
-      console.log(items)
       return items
     }
   }

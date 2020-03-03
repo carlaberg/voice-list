@@ -30,4 +30,5 @@ extend type Mutation {
   createListWithItems(input: CreateListWithItemsInput!): List!
   updateList(id: ID!, input: UpdateListInput!): List!
   deleteList(id: ID!): List!
+  deleteListAndItems(id: ID!): List!
 }
