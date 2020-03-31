@@ -28,7 +28,7 @@
     "isomorphic-unfetch": "2.0.0",
     "just-debounce-it": "^1.1.0",
     "lodash": "^4.17.15",
-    "next": "^9.2.1",
+    "next": "^9.3.2",
     "next-compose-plugins": "^2.1.1",
     "next-page-transitions": "^1.0.0-alpha.4",
     "prop-types": "15.6.1",
