@@ -7,4 +7,4 @@
   API_HOST = "https://develop--voice-list.netlify.com"
 
 [context.production.environment]
-  API_HOST = "https://voice-list.netlify.com"
+  API_HOST = "https://voice-list.netlify.app"
