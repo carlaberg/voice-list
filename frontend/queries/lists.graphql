@@ -1,7 +1,9 @@
-query {
+query UserLists {
   userLists {
 		name
     _id
+    open @client
+    __typename
     items {
       _id
       text

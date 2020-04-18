@@ -1,0 +1,3 @@
+mutation UpdateListVisibilityFilter($id: ID!) {
+    updateListVisibilityFilter(id: $id) @client
+}

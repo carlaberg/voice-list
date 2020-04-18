@@ -42,3 +42,13 @@ export const withDynamicTag = Component => {
 
     return DynamicTag;
 };
+
+export const arrayOfObjectsToObjectWithItemIdsAsKey = (items) => {
+    items.userLists.reduce((obj, item) => {
+        obj[item._id] = {
+          ...item,
+          open: false
+        }
+        return obj
+      }, {})
+}

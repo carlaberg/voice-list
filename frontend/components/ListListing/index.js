@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
-import { useQuery, useMutation } from 'react-apollo'
-import GET_LISTS from '../../queries/lists.graphql'
+import { useQuery, useMutation, gql } from 'react-apollo'
+import { apolloClient as client } from '../../lib/init-apollo'
+import LISTS from '../../queries/lists.graphql'
 import DELETE_LIST_AND_ITEMS from '../../queries/deleteListAndItems.graphql'
+import DELETE_LIST_ITEM from '../../queries/deleteListItem.graphql'
+import UPDATE_LIST_VISIBILITY_FILTER from '../../queries/updateListVisibilityFilter.graphql'
 import { groupBy, values } from 'lodash'
 import { Toggle, Modal } from 'carls-components'
 import {
@@ -21,59 +24,50 @@ import Spinner from '../Spinner'
 import ApproveOrDeny from '../ApproveOrDeny'
 
 const ListListing = () => {
+
+  let itemInput = React.createRef()
+
   const {
-    error,
-    loading,
-    data
-  } = useQuery(GET_LISTS)
+    error: listsError,
+    loading: listsLoading,
+    data: listsData
+  } = useQuery(LISTS)
 
   const [deleteListAndItems, { deleteListAndItemsData }] = useMutation(
     DELETE_LIST_AND_ITEMS, {
       update(cache, { data: { deleteListAndItems: deletedList } }) {
-        const { userLists } = cache.readQuery({ query: GET_LISTS })
+        const { userLists } = cache.readQuery({ query: LISTS })
         const updatedList = userLists.filter((item) => item._id !== deletedList._id)  
         cache.writeQuery({
-          query: GET_LISTS,
+          query: LISTS,
           data: { userLists: updatedList }
         })
       }
     }
   )
 
-  const [visibilityFilter, setVisibilityFilter] = useState(null)
+  const [deleteListItem, { deleteListItemData }] = useMutation(DELETE_LIST_ITEM, {
+    refetchQueries: [{ query: LISTS }]
+  })
+
+  const [updateListVisibilityFilter, { updateListVisibilityFilterData }] = useMutation(UPDATE_LIST_VISIBILITY_FILTER)
   const [activeInput, setactiveInput] = useState(null)
 
-  useEffect(() => {
-    if (data.userLists) {
-      const initialListState = data.userLists.reduce((obj, item) => {
-        obj[item._id] = {
-          ...item,
-          open: false
-        }
-        return obj
-      }, {})
+  if (listsError) return null
+  if (listsLoading) return <Spinner />
 
-      setVisibilityFilter(initialListState)
-    }
-  }, [data.userLists])
-
-  if (error) return null
-  if (!visibilityFilter) return null
-  if (loading) return <Spinner />
 
   return (
     <React.Fragment>
       <Heading1>YOUR LISTS</Heading1>
-      {data.userLists.map((list, listIndex) => (
-        <React.Fragment key={listIndex}>
+      {listsData.userLists.map((list, listIndex) => (
+        <React.Fragment key={list._id}>
           <ListContainer
-            className={visibilityFilter[list._id].open && 'list--open'}
+            className={listsData.userLists.find((item) => item._id == list._id)?.open && 'list--open'}
           >
             <Heading2
               onClick={(e) => {
-                const state = {...visibilityFilter}
-                state[list._id].open = !state[list._id].open
-                setVisibilityFilter(state)
+                updateListVisibilityFilter({ variables: { id: list._id } })
               }}
             >
               {list.name}
@@ -87,6 +81,7 @@ const ListListing = () => {
                           <ApproveOrDeny
                             approveCallback={() => {
                               deleteListAndItems({ variables: { id: list._id } })
+                              toggle()
                             }}
                             denyCallback={toggle}
                           />
@@ -98,33 +93,24 @@ const ListListing = () => {
                 <MenuArrow />
               </IconGroup>
             </Heading2>
-            <List key={listIndex}>
+            <List key={list._id}>
               {list.items.map((item, itemIndex) => (
                 <ListItem
+                  ref={itemInput}
                   className={activeInput === item._id ? 'active' : ''} 
-                  key={itemIndex}
+                  key={item._id}
                   onClick={() => setactiveInput(item._id)}
                 >
                   <StyledEditableInput
                     defaultValue={item.text}
+                    isFocused={activeInput === item._id}
+                    onBlur={() => setactiveInput(null)}
                   />
                   <ItemIconGroup>
-                    <Edit />
-                    <Toggle>
-                      {({ on, toggle }) => (
-                        <React.Fragment>
-                          <Trash onClick={toggle} />
-                          <Modal toggle={toggle} on={on}>
-                            {() => (
-                              <ApproveOrDeny
-                                approveCallback={() => console.log('yes delete')}
-                                denyCallback={toggle}
-                              />
-                            )}
-                          </Modal>
-                        </React.Fragment>
-                      )}
-                    </Toggle>
+                    <Edit onClick={() => setactiveInput(item._id)} />
+                    <Trash onClick={() => {
+                      deleteListItem({ variables: { id: item._id } })
+                    }} />
                   </ItemIconGroup>
                 </ListItem>
               ))}
