@@ -4,7 +4,7 @@ const listitem = require('./listitem')
 const merge = require('lodash/merge')
 const MongoConnector = require('./utils/Mongo')
 const jwt = require('jsonwebtoken')
-console.log('function start')
+
 // Init DB
 const dbConnection = MongoConnector.initDb()
 
