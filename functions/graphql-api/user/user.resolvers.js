@@ -57,6 +57,8 @@ const loginUser = async (_, args, ctx) => {
     { expiresIn: '1h' }
   )
 
+  console.log(token)
+  console.log(user._id.toString())
   return { token, userId: user._id.toString() }
 }
 
