@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useQuery, useMutation, gql } from 'react-apollo'
 import { apolloClient as client } from '../../lib/init-apollo'
+import debounce from 'just-debounce-it'
 import LISTS from '../../queries/lists.graphql'
 import DELETE_LIST_AND_ITEMS from '../../queries/deleteListAndItems.graphql'
 import DELETE_LIST_ITEM from '../../queries/deleteListItem.graphql'
 import UPDATE_LIST_VISIBILITY_FILTER from '../../queries/updateListVisibilityFilter.graphql'
+import UPDATE_LIST_ITEM from '../../queries/updateListItem.graphql'
 import { groupBy, values } from 'lodash'
 import { Toggle, Modal } from 'carls-components'
 import {
@@ -50,8 +52,14 @@ const ListListing = () => {
     refetchQueries: [{ query: LISTS }]
   })
 
+  const [updateListItem, { updateListItemData }] = useMutation(UPDATE_LIST_ITEM)
+
   const [updateListVisibilityFilter, { updateListVisibilityFilterData }] = useMutation(UPDATE_LIST_VISIBILITY_FILTER)
   const [activeInput, setactiveInput] = useState(null)
+
+  const handleListItemChange = debounce((id, value) => {
+    updateListItem({ variables: { id, input: { text: value } } })
+  }, 500)
 
   if (listsError) return null
   if (listsLoading) return <Spinner />
@@ -105,6 +113,10 @@ const ListListing = () => {
                     defaultValue={item.text}
                     isFocused={activeInput === item._id}
                     onBlur={() => setactiveInput(null)}
+                    onChange={(e) => {
+                      const value = e.target.value
+                      handleListItemChange(item._id, value)
+                    }}                    
                   />
                   <ItemIconGroup>
                     <Edit onClick={() => setactiveInput(item._id)} />
