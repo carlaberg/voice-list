@@ -4,7 +4,7 @@
   publish = "frontend/out/"
 
 [context.develop.environment]
-  API_HOST = "https://develop--voice-list.netlify.com"
+  API_HOST = "https://develop--voice-list.netlify.app"
 
 [context.production.environment]
   API_HOST = "https://voice-list.netlify.app"
