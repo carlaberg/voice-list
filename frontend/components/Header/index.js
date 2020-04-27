@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { Query } from 'react-apollo';
-import { withRouter } from 'next/router';
+import Link from 'next/link'
+import { Query } from 'react-apollo'
+import { withRouter } from 'next/router'
 import { Toggle, Modal } from 'carls-components'
 import { Transition, animated } from 'react-spring'
 import AuthForm from '../AuthForm'
@@ -90,6 +90,15 @@ const Header = props => (
                   transform: styles.y.interpolate(y => `translateY(${y}%)`)
                 }}
               >
+                <Button
+                  type="link"
+                  theme="light"
+                  href="/dashboard"
+                  active={props.router.pathname === '/dashboard'}
+                >
+                  {console.log(props)}
+                  Dashboard
+                </Button>
                 <Button
                   theme="light"
                   onClick={() => {

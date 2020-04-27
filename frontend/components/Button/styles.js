@@ -1,11 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { FontMedium } from '../../layout/mixins'
 
-export const StyledButton = styled.button`
+export const Wrapper = css`
   height: 40px;
   border: ${props => props.theme.border};
   background: ${props => props.theme.backgroundColor};
-  margin-left: 15px;
   cursor: pointer;
   padding: 0 15px;
   text-transform: uppercase;
@@ -14,4 +13,12 @@ export const StyledButton = styled.button`
   border-radius: ${({ theme }) => theme.borderRadius};
   display: flex;
   align-items: center;
+`
+
+export const StyledButton = styled.button`
+  ${Wrapper}
+`
+
+export const StyledLink = styled.a`
+  ${Wrapper}
 `
