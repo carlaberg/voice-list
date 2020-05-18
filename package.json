@@ -8,7 +8,10 @@
   "scripts": {
     "dev": "parcel frontend/index.html",
     "prebuild": "cd functions && npm i",
-    "build": "cd frontend && npm install && npm run build && npm run export"
+    "build": "cd frontend && npm install && npm run build && npm run export",
+    "test": "jest"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^26.0.1"
+    }
 }
