@@ -7,3 +7,5 @@ docker/data/**/*
 
 frontend/.next
 frontend/out
+
+.coveralls.yml
