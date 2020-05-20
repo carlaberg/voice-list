@@ -9,7 +9,7 @@
     "dev": "parcel frontend/index.html",
     "prebuild": "cd functions && npm i",
     "build": "cd frontend && npm install && npm run build && npm run export",
-    "test": "jest --coverage && coveralls < coverage/lcov.info"
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "coveralls": "^3.1.0",
