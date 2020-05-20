@@ -8,4 +8,5 @@ docker/data/**/*
 frontend/.next
 frontend/out
 
+coverage/
 .coveralls.yml
