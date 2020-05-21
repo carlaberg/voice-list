@@ -9,7 +9,7 @@ class MyApp extends App {
 
   render() {
     const { Component, apolloClient, pageProps } = this.props
-
+    console.log('testing')
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
