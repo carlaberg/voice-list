@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - 10
+before_script:
+  - npm install codecov
+script:
+  - npm run test
+after_script:
+  codecov
