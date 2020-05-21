@@ -15,7 +15,13 @@ Should be up to date with production (master) branch. When developing a new feat
 * Master - production
 * Develop - for local development
 
-## Continous deployment
-Pushing changes to the branches above will trigger a build on netlify.
-* Pushing to master will trigger a build avaliable under: voice-list.netlify.app
-* Pushing to develop will trigger a build avaliable under: develop--voice-list.netlify.app
+## CI/CD
+This project is using Travis for running unit tests and Netlify to deploy.
+
+This is the recommended workflow:
+1. Do work in a feature branch.
+2. When the feature is ready, make a pull request back to develop.
+3. The test suite will run every time code is pushed to the repository.
+4. A pull request to develop will create a build preview on netlify.
+5. If the tests pass and the build preview looks good the feature can be merged with develop.
+6. Merging the feature into develop will trigger a branch deploy on netlify avliable at https://develop--voice-list.netlify.app/
