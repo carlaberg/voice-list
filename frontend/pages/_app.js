@@ -9,7 +9,7 @@ class MyApp extends App {
 
   render() {
     const { Component, apolloClient, pageProps } = this.props
-    console.log('testing if deploy happens when tests fail')
+    console.log('swithed to build hook')
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
