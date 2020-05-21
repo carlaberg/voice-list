@@ -1,6 +1,6 @@
 # Voice list - Serverless list app
 [![Netlify Status](https://api.netlify.com/api/v1/badges/4d442a1d-9023-4427-b788-bde86da8a286/deploy-status)](https://app.netlify.com/sites/voice-list/deploys)
-[![Coverage Status](https://coveralls.io/repos/github/carlaberg/voice-list/badge.svg?branch=feature/test-functions-with-jest)](https://coveralls.io/github/carlaberg/voice-list?branch=feature/test-functions-with-jest)
+[![codecov](https://codecov.io/gh/carlaberg/voice-list/branch/develop/graph/badge.svg)](https://codecov.io/gh/carlaberg/voice-list)
 
 ## Local development
 
