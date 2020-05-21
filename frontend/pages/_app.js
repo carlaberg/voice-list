@@ -9,7 +9,7 @@ class MyApp extends App {
 
   render() {
     const { Component, apolloClient, pageProps } = this.props
-    console.log('swithed to build hook')
+    console.log('swithed to build hook - added branch in netlify admin')
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
