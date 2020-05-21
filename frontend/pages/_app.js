@@ -9,7 +9,7 @@ class MyApp extends App {
 
   render() {
     const { Component, apolloClient, pageProps } = this.props
-
+    console.log('Travis seems to work - testing with codecov bot installed')
     return (
       <Container>
         <ApolloProvider client={apolloClient}>
