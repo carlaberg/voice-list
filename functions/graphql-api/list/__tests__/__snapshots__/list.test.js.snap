@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`List resolvers Can retrieve single list by list ID 1`] = `
+Object {
+  "data": Object {
+    "list": Object {
+      "_id": "5f54d28ebef1e6f60116380b",
+      "createdBy": Object {
+        "_id": "5f54d28ebef1e6f60116380c",
+      },
+      "items": Array [
+        Object {
+          "text": "m%o[omsj",
+        },
+        Object {
+          "text": "#uy(4giiycum#hn",
+        },
+      ],
+      "name": "Johanna",
+    },
+  },
+  "errors": undefined,
+  "extensions": undefined,
+  "http": Object {
+    "headers": Headers {
+      Symbol(map): Object {},
+    },
+  },
+}
+`;

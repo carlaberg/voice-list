@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "dependencies": {
+    "mongodb": "^3.6.1",
+    "mongodb-memory-server": "^6.6.7",
     "netlify-lambda": "^1.6.3"
   },
   "scripts": {
     "dev": "parcel frontend/index.html",
     "prebuild": "cd functions && npm i",
     "build": "cd frontend && npm install && npm run build && npm run export",
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "tdd": "jest --watch"
   },
   "devDependencies": {
     "coveralls": "^3.1.0",

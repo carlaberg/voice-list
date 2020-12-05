@@ -6,8 +6,9 @@ const list = async (_, args, ctx) => {
     throw new Error('You must be logged in to see this list')
   }
   
-  return List.findById(args.id)
-    .exec()
+  const list = await List.findById(args.id).exec()
+    
+  return list
 }
 
 const createList = async (_, args, ctx) => {

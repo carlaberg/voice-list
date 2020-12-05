@@ -2,11 +2,9 @@ const user = require('./user')
 const list = require('./list')
 const listitem = require('./listitem')
 const merge = require('lodash/merge')
-const MongoConnector = require('./utils/Mongo')
 const jwt = require('jsonwebtoken')
 
-// Init DB
-const dbConnection = MongoConnector.initDb()
+
 
 module.exports = {
   typeDefs: [
