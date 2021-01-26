@@ -17,9 +17,9 @@ if (!process.browser) {
 }
 
 console.log(process.env.BASE_URL)
-console.log('API_HOST: ', API_HOST)
-console.log('DEPLOY_PRIME_URL: ', DEPLOY_PRIME_URL)
-console.log('CONTEXT: ', CONTEXT)
+// console.log('API_HOST: ', API_HOST)
+// console.log('DEPLOY_PRIME_URL: ', DEPLOY_PRIME_URL)
+// console.log('CONTEXT: ', CONTEXT)
 
 export let apolloClient = null
 
