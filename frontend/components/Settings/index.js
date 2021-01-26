@@ -7,6 +7,7 @@ import debounce from 'just-debounce-it'
 import Input from '../Input'  
 
 const Settings = () => {
+  console.log(process.env)
   const { error: userError, data: userData, loading: userLoading, } = useQuery(USER)
   const [updateUser, { error: updateUserError, data: updateUserData }] = useMutation(UPDATE_USER)
   
