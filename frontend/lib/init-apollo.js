@@ -10,6 +10,17 @@ const {
   API_HOST
 } = process.env
 
+if (!process.browser) {
+  const {
+    CONTEXT,
+    DEPLOY_PRIME_URL
+  } = process.env
+
+  console.log('API_HOST: ', API_HOST)
+  console.log('DEPLOY_PRIME_URL: ', DEPLOY_PRIME_URL)
+  console.log('CONTEXT: ', CONTEXT)
+}
+
 export let apolloClient = null
 
 // Polyfill fetch() on the server (used by apollo-client)
