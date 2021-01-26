@@ -10,4 +10,4 @@
   API_HOST = "https://voice-list.netlify.app"
 
 [context.deploy-preview]
-  API_HOST = DEPLOY_PRIME_URL
+  API_HOST = "DEPLOY_PRIME_URL"
