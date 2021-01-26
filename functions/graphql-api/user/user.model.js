@@ -8,6 +8,20 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  commands: {
+    confirm: {
+      type: String,
+      default: 'This is default'
+    },
+    add: {
+      type: String,
+      default: 'This is default'
+    },
+    remove: {
+      type: String,
+      default: 'This is default'
+    }
   }
 }, {timestamps: true})
 

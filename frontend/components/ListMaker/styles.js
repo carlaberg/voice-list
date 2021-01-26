@@ -5,19 +5,9 @@ import ButtonTheme from '../Button/themes'
 import Input from '../Input'
 import { Message } from '../Input/styles'
 
-export const Wrapper = styled.div`
-`
+export const Wrapper = styled.div``
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: ${({ theme }) => theme.gutter};
-  background: ${({ theme }) => theme.colorWhite};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  border: 1px solid ${({ theme }) => theme.colorAccentOpacity};
-  padding: ${({ theme }) => theme.gutterMedium};
-
-`
+export const Form = styled.form``
 
 export const SubmitButton = styled(StyledButton)`
   ${ButtonTheme.light}
