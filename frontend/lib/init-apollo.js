@@ -8,11 +8,13 @@ import { resolversInitialState } from './resolversInitialState'
 
 const {
   API_HOST,
-  CONTEXT
+  CONTEXT,
+  DEPLOY_URL
 } = process.env
 
 console.log('API_HOST: ', API_HOST)
 console.log('CONTEXT: ', CONTEXT)
+console.log('DEPLOY_URL: ', DEPLOY_URL)
 
 export let apolloClient = null
 
