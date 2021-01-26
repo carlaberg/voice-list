@@ -1,12 +1,13 @@
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const user = () => {
-  return {
-    _id: 'ulle',
-    email: 'car@use.se',
-    password: '12345' 
+const user = async (_, args, ctx) => {
+  if (!ctx.request.userId) {
+    throw new Error('You must logg to access this')
   }
+
+  const user = await ctx.models.user.findOne({ _id: ctx.request.userId});
+  return user
 }
 
 const createUser = async (_, args, ctx) => {
@@ -57,8 +58,6 @@ const loginUser = async (_, args, ctx) => {
     { expiresIn: '1h' }
   )
 
-  console.log(token)
-  console.log(user._id.toString())
   return { token, userId: user._id.toString() }
 }
 
@@ -68,6 +67,23 @@ const loggedInUser = (_, args, ctx) => {
   }
 }
 
+const updateUser = async (_, args, ctx) => {
+  if (!ctx.request.userId) {
+    throw new Error('You must be logged in to update a list')
+  }
+  
+  const update = args.input
+
+  
+  const result = await ctx.models.user.findByIdAndUpdate(ctx.request.userId, update, { new: true })
+  .exec()
+  
+  console.log(result)
+
+  return result
+}
+
+
 module.exports = {
   Query: {
     user,
@@ -75,6 +91,7 @@ module.exports = {
   },
   Mutation: {
     loginUser,
-    createUser
+    createUser,
+    updateUser
   }
 }

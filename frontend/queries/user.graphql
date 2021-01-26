@@ -1,0 +1,7 @@
+query User {
+  user {
+    _id
+    commands
+    password
+  }
+}

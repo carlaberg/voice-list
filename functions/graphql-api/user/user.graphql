@@ -1,9 +1,22 @@
 # GQL schema defenition for user
 
+type Commands {
+  confirm: String
+  add: String
+  remove: String
+}
+
+input CommandsInput {
+  confirm: String
+  add: String
+  remove: String
+}
+
 type User {
   _id: ID!
   email: String!
-  password: String
+  password: String,
+  commands: Commands
 }
 
 type LoggedInUserPayload {
@@ -13,6 +26,10 @@ type LoggedInUserPayload {
 input CreateUserInput {
   email: String!
   password: String!
+}
+
+input UpdateUserInput {
+  commands: CommandsInput
 }
 
 type AuthData {
@@ -33,4 +50,5 @@ type Query {
 type Mutation {
   loginUser(input: LoginInput!): AuthData!
   createUser(input: CreateUserInput!): AuthData!
+  updateUser(input: UpdateUserInput): User
 }

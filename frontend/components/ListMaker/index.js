@@ -8,6 +8,7 @@ import {
 import CREATE_LIST_WITH_ITEMS from '../../queries/createListWithItems.graphql'
 import CURRENT_LIST from '../../queries/currentList.graphql'
 import GET_LISTS from '../../queries/lists.graphql'
+import Card from '../Card'
 
 const UPDATE_CURRENT_LIST = gql`
   mutation UpdateCurrentList($name: String!, $items: [String!]!) {
@@ -105,74 +106,76 @@ const ListMaker = (props) => {
 
   return (
     <Wrapper>
-      <Form
-        onSubmit={(e) => {
-          e.preventDefault()
-          // updateMessages()
-          if (items.length < 1 || !listname) return
-          createListWithItems({
-            variables: {
-              input: {
-                name: listname,
-                items
+      <Card>
+        <Form
+          onSubmit={(e) => {
+            e.preventDefault()
+            // updateMessages()
+            if (items.length < 1 || !listname) return
+            createListWithItems({
+              variables: {
+                input: {
+                  name: listname,
+                  items
+                }
               }
-            }
-          })
+            })
 
-          if (!createListError) {
-            resetForm();
-          }
-        }}
-      >
-        <InputGroup>
-          <ListInput
-            name="Listname"
-            placeholder="List name"
-            onChange={({ target }) => handleInputChange(target)}
-            onBlur={handleBlur}
-            // onChange={({ target }) => {
-            //   handleInputChange(target)
-            //   // debounce(() => updateCurrentList({
-            //   //   variables: {
-            //   //     name: listname
-            //   //     // list: items
-            //   //   }
-            //   // }), 500)
-            //   debouncedHandler()
-            // }}
-            value={listname}
-            valid={listname !== ''}
-            showMessage={nameMessage !== ''}
-            message={nameMessage}
-          />
-        </InputGroup>
-        <InputGroup>
-          <ListInput
-            name="Listitem"
-            placeholder="List item"
-            // onChange={handleInputChange}
-            onChange={({ target }) => handleInputChange(target)}
-            value={listitem}
-            valid={listitem !== ''}
-            message={itemMessage}
-            showMessage={itemMessage !== ''}
-          />
-          <SubmitButton
-            type="button"
-            onClick={() => addListItem()}
-            theme="light"
-          >
-            Add
-          </SubmitButton>
-        </InputGroup>
-        {items.map(item => <ListItem key={item}>{item}</ListItem>)}
-        {itemsMessage}
-        <InputGroup>
-          <SubmitButton type="submit" style={{ margin: '0 auto' }} theme="light">
-            Save list
-          </SubmitButton>
-        </InputGroup>
-      </Form>
+            if (!createListError) {
+              resetForm();
+            }
+          }}
+        >
+          <InputGroup>
+            <ListInput
+              name="Listname"
+              placeholder="List name"
+              onChange={({ target }) => handleInputChange(target)}
+              onBlur={handleBlur}
+              // onChange={({ target }) => {
+              //   handleInputChange(target)
+              //   // debounce(() => updateCurrentList({
+              //   //   variables: {
+              //   //     name: listname
+              //   //     // list: items
+              //   //   }
+              //   // }), 500)
+              //   debouncedHandler()
+              // }}
+              value={listname}
+              valid={listname !== ''}
+              showMessage={nameMessage !== ''}
+              message={nameMessage}
+            />
+          </InputGroup>
+          <InputGroup>
+            <ListInput
+              name="Listitem"
+              placeholder="List item"
+              // onChange={handleInputChange}
+              onChange={({ target }) => handleInputChange(target)}
+              value={listitem}
+              valid={listitem !== ''}
+              message={itemMessage}
+              showMessage={itemMessage !== ''}
+            />
+            <SubmitButton
+              type="button"
+              onClick={() => addListItem()}
+              theme="light"
+            >
+              Add
+            </SubmitButton>
+          </InputGroup>
+          {items.map(item => <ListItem key={item}>{item}</ListItem>)}
+          {itemsMessage}
+          <InputGroup>
+            <SubmitButton type="submit" style={{ margin: '0 auto' }} theme="light">
+              Save list
+            </SubmitButton>
+          </InputGroup>
+        </Form>
+      </Card>
     </Wrapper>
   )
 }

@@ -6,9 +6,7 @@ import { clientSideResolvers } from './resolvers'
 import { typeDefs } from './typeDefs'
 import { resolversInitialState } from './resolversInitialState'
 
-const {
-  API_HOST
-} = process.env
+const BASE_URL = process.env.NODE_ENV === 'development' ? process.env.API_HOST : process.env.DEPLOY_URL
 
 export let apolloClient = null
 
@@ -20,7 +18,7 @@ if (!process.browser) {
 }
 
 const httpLink = new HttpLink({
-  uri:`${API_HOST}/.netlify/functions/graphql-api`, // Server URL (must be absolute)
+  uri:`${BASE_URL}/.netlify/functions/graphql-api`, // Server URL (must be absolute)
   credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
 })
 
@@ -38,7 +36,13 @@ const authLink = setContext((_, { headers }) => {
 
 function create(initialState) {
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
-  const clientCache = new InMemoryCache()
+  const clientCache = new InMemoryCache({
+    typePolicies: {
+      User: {
+        keyFields: ['_id']
+      }
+    }
+  })
 
   //Adding initial state to cache
   clientCache.writeData(resolversInitialState)
