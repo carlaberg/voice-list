@@ -7,19 +7,16 @@ import { typeDefs } from './typeDefs'
 import { resolversInitialState } from './resolversInitialState'
 
 const {
+  CONTEXT,
+  DEPLOY_PRIME_URL,
   API_HOST
 } = process.env
 
-if (!process.browser) {
-  const {
-    CONTEXT,
-    DEPLOY_PRIME_URL
-  } = process.env
+const BASE_URL = CONTEXT === 'deploy-preview' ? DEPLOY_PRIME_URL : API_HOST
 
-  console.log('API_HOST: ', API_HOST)
-  console.log('DEPLOY_PRIME_URL: ', DEPLOY_PRIME_URL)
-  console.log('CONTEXT: ', CONTEXT)
-}
+console.log('API_HOST: ', API_HOST)
+console.log('DEPLOY_PRIME_URL: ', DEPLOY_PRIME_URL)
+console.log('CONTEXT: ', CONTEXT)
 
 export let apolloClient = null
 
@@ -31,7 +28,7 @@ if (!process.browser) {
 }
 
 const httpLink = new HttpLink({
-  uri:`${API_HOST}/.netlify/functions/graphql-api`, // Server URL (must be absolute)
+  uri:`${BASE_URL}/.netlify/functions/graphql-api`, // Server URL (must be absolute)
   credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
 })
 
