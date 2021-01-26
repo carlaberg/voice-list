@@ -6,15 +6,7 @@ import { clientSideResolvers } from './resolvers'
 import { typeDefs } from './typeDefs'
 import { resolversInitialState } from './resolversInitialState'
 
-const {
-  API_HOST,
-  CONTEXT,
-  DEPLOY_URL
-} = process.env
-
-console.log('API_HOST: ', API_HOST)
-console.log('CONTEXT: ', CONTEXT)
-console.log('DEPLOY_URL: ', DEPLOY_URL)
+const BASE_URL = process.env.NODE_ENV === 'development' ? process.env.API_HOST : process.env.DEPLOY_URL
 
 export let apolloClient = null
 
@@ -26,7 +18,7 @@ if (!process.browser) {
 }
 
 const httpLink = new HttpLink({
-  uri:`${API_HOST}/.netlify/functions/graphql-api`, // Server URL (must be absolute)
+  uri:`${BASE_URL}/.netlify/functions/graphql-api`, // Server URL (must be absolute)
   credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
 })
 
