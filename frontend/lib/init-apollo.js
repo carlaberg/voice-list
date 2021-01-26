@@ -6,14 +6,17 @@ import { clientSideResolvers } from './resolvers'
 import { typeDefs } from './typeDefs'
 import { resolversInitialState } from './resolversInitialState'
 
-const {
-  CONTEXT,
-  DEPLOY_PRIME_URL,
-  API_HOST
-} = process.env
+if (!process.browser) {
+  const {
+    CONTEXT,
+    DEPLOY_PRIME_URL,
+    API_HOST
+  } = process.env
 
-const BASE_URL = CONTEXT === 'deploy-preview' ? DEPLOY_PRIME_URL : API_HOST
+  process.env.BASE_URL = CONTEXT === 'deploy-preview' ? DEPLOY_PRIME_URL : API_HOST
+}
 
+console.log(process.env.BASE_URL)
 console.log('API_HOST: ', API_HOST)
 console.log('DEPLOY_PRIME_URL: ', DEPLOY_PRIME_URL)
 console.log('CONTEXT: ', CONTEXT)
