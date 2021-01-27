@@ -28,7 +28,7 @@ const Settings = () => {
 
   useEffect(() => {
     if (!userData) return
-    const { __typename, ...rest } = userData?.user?.commands
+    const { __typename, ...rest } = userData?.user?.commands || {}
     setCommands(rest)
   }, [userData])
 
