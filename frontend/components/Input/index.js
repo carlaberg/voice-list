@@ -1,5 +1,11 @@
 import {
-  InputWrapper, StyledInput, Underline, Message, Indicator
+  Wrapper,
+  InputWrapper,
+  StyledInput,
+  Underline,
+  Message,
+  Indicator,
+  Label
 } from './styles';
 
 class Input extends React.Component {
@@ -13,17 +19,20 @@ class Input extends React.Component {
 
   render() {
     const { showIndicators } = this.state
-    const { message, valid, showMessage } = this.props
+    const { message, valid, showMessage, label, allowIndicators = true } = this.props
     
     return (
-      <InputWrapper className={this.props.className} onClick={() => this.setState({ showIndicators: true })}>
-        <StyledInput {...this.props} />
+      <Wrapper className={this.props.className} onClick={() => this.setState({ showIndicators: true })}>
+        <InputWrapper>
+          {label && <Label>{label}</Label>}
+          <StyledInput {...this.props} />
+        </InputWrapper>
         <Underline />
         <Message message={message} show={showMessage}>
           {message}
         </Message>
-        <Indicator show={showIndicators} valid={valid} />
-      </InputWrapper>
+        {allowIndicators && <Indicator show={showIndicators} valid={valid} />} 
+      </Wrapper>
     );
   }
 }

@@ -1,8 +1,12 @@
 import styled from 'styled-components'
-import { FontMedium, FontSmall } from '../../layout/mixins'
+import { FontMedium, FontSmall, FontLarge } from '../../layout/mixins'
+
+export const Wrapper = styled.div`
+  width: 100%;
+  position: relative;
+`
 
 export const InputWrapper = styled.div`
-  width: 100%;
   position: relative;
 `
 
@@ -25,6 +29,20 @@ export const StyledInput = styled.input`
 
   &:focus + span {
     width: 100%;
+  }
+`
+
+export const Label = styled.label`
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  transform: translateY(-50%);
+  ${FontMedium};
+  font-weight: bold;
+  color: ${({ theme }) => theme.colorBlack};
+
+  ${StyledInput}:focus +  {
+    color: red;
   }
 `
 
