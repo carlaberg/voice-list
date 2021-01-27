@@ -7,7 +7,6 @@ import debounce from 'just-debounce-it'
 import Input from '../Input'  
 
 const Settings = () => {
-  console.log(process.env)
   const { error: userError, data: userData, loading: userLoading, } = useQuery(USER)
   const [updateUser, { error: updateUserError, data: updateUserData }] = useMutation(UPDATE_USER)
   
@@ -29,7 +28,7 @@ const Settings = () => {
 
   useEffect(() => {
     if (!userData) return
-    const { __typename, ...rest } = userData.user.commands
+    const { __typename, ...rest } = userData?.user?.commands
     setCommands(rest)
   }, [userData])
 
